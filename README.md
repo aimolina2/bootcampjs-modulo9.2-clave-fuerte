@@ -55,3 +55,11 @@ Si la clave tiene 8 o más caracteres nos devuelve un `esValida: true`, sino un 
 Aqui pasaremos todos los caracteres a minúscula para comprobar que no coincide en ningun momento el nombre de usuario con la clave. Después con un _.include_ verificamos que no esté incluido en la contraseña-
 
 Así, si la clave no contiene el nombre de usuari nos devuelve un `esValida: true`, sino un `esValida: false` + `error: "La clave no debe tener el nombre del usuario"`
+
+## 06. La clave no puede contener palabras comunes
+
+Pasaremos el array _commonPasswords_ del archivo **constants.ts** que contiene las palabras comunes para validar que no se usan en la contraseña.
+
+Igual que antes, comprobaremos que no se usan en mayúscula ni minúscula.
+
+Si la clave no contiene ninguna de estas "palabras" comunes nos devuelve un `esValida: true`, sino un `esValida: false` + `error: "La clave no debe de contener palabras comunes"`

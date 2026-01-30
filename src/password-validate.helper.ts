@@ -3,6 +3,7 @@ import {
   MINUSCULAS,
   NUMEROS,
   CARACTERES_ESPECIALES,
+  commonPasswords,
 } from "./constants";
 import { ValidacionClave } from "./model";
 
@@ -75,5 +76,24 @@ export const tieneNombreUsuario = (
     : {
         esValida: false,
         error: "La clave no debe tener el nombre del usuario",
+      };
+};
+
+// PALABRAS COMUNES
+
+export const tienePalabrasComunes = (
+  clave: string,
+  commonPasswords: string[],
+): ValidacionClave => {
+  const passwordLowerCase = clave.toLowerCase();
+  const contienePalabraComun = commonPasswords.some((palabra) =>
+    passwordLowerCase.includes(palabra.toLowerCase()),
+  );
+
+  return !contienePalabraComun
+    ? { esValida: true }
+    : {
+        esValida: false,
+        error: "La clave no debe de contener palabras comunes",
       };
 };

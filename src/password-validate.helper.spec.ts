@@ -1,3 +1,4 @@
+import { commonPasswords } from "./constants";
 import { ValidacionClave } from "./model";
 import {
   tieneMayusculasYMinusculas,
@@ -5,6 +6,7 @@ import {
   tieneCaracteresEspeciales,
   tieneLongitudMinima,
   tieneNombreUsuario,
+  tienePalabrasComunes,
 } from "./password-validate.helper";
 
 // MAYÚSCULAS Y MINÚSCULAS
@@ -127,6 +129,33 @@ describe("tieneNombreUsuario", () => {
     const expected: ValidacionClave = {
       esValida: false,
       error: "La clave no debe tener el nombre del usuario",
+    };
+
+    expect(validacion).toEqual(expected);
+  });
+});
+
+// PALABRAS COMUNES
+
+describe("tienePalabrasComunes", () => {
+  it("debería retornar esValida: true si la clave no contiene palabras comunes", () => {
+    const validacion: ValidacionClave = tienePalabrasComunes(
+      "ClaveSegura490?",
+      commonPasswords,
+    );
+    const expected: ValidacionClave = { esValida: true };
+
+    expect(validacion).toEqual(expected);
+  });
+
+  it("debería retornar esValida: false si la clave contiene palabras comunes", () => {
+    const validacion: ValidacionClave = tienePalabrasComunes(
+      "ClaveWelcome123",
+      commonPasswords,
+    );
+    const expected: ValidacionClave = {
+      esValida: false,
+      error: "La clave no debe de contener palabras comunes",
     };
 
     expect(validacion).toEqual(expected);
