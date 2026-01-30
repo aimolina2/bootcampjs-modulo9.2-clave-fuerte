@@ -3,6 +3,7 @@ import {
   tieneMayusculasYMinusculas,
   tieneNumeros,
   tieneCaracteresEspeciales,
+  tieneLongitudMinima,
 } from "./password-validate.helper";
 
 // MAYÚSCULAS Y MINÚSCULAS
@@ -77,6 +78,27 @@ describe("tieneCaracteresEspeciales", () => {
     const expected: ValidacionClave = {
       esValida: false,
       error: "La clave debe de tener caracteres especiales",
+    };
+
+    expect(validacion).toEqual(expected);
+  });
+});
+
+// LONGITUD MÍNIMA
+
+describe("tieneLongitudMinima", () => {
+  it("debería retornar esValida: true si la clave tiene una longitud mínima de 8 caracteres", () => {
+    const validacion: ValidacionClave = tieneLongitudMinima("ClaveSegura123");
+    const expected: ValidacionClave = { esValida: true };
+
+    expect(validacion).toEqual(expected);
+  });
+
+  it("debería retornar esValida: false si la clave tiene una longitud de menos de 8 caracteres", () => {
+    const validacion: ValidacionClave = tieneLongitudMinima("Clave3");
+    const expected: ValidacionClave = {
+      esValida: false,
+      error: "La clave debe de tener una longitud mínima de 8 caracteres",
     };
 
     expect(validacion).toEqual(expected);
