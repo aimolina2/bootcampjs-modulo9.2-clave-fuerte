@@ -14,8 +14,20 @@ Pasos:
 Para realizar este proyecto se han creado varios archivos con el fin de tener el código mucho más ordenado y facilitar su lectura o cambios en caso de ser necesario:
 
 - **model.ts** con las `interface` que conforman nuestro modelo.
-- **constants.ts** con las contraseñas y otrso parámetros que vamos a pasar a nuestro modelo para verificar las contraseñas.
+- **constants.ts** con las contraseñas y otros parámetros que vamos a pasar a nuestro modelo para verificar las contraseñas.
 - **main.ts** donde indicamos que debemos mostrar por `consola` el resultado.
 - **password-validate.ts** con la _función principal_ que nos indica cómo validar la contraseña. Es a la que llamamos en el main.ts.
 - **password-validate.helper.ts** _desglosamos las funciones_ a las que llamamos desde _password-validate.ts_. Paso a paso que nos ayuda a crear una función mayor.
 - **password-validate.helper.spec.ts** donde realizamos _pruebas_ unitarias para asegurarnos de que las funciones se ejecutan sin errores.
+
+## 01. La clave debe tener mayúsculas y minúsculas
+
+Todas las funciones "individuales" que nos ayudan a validar paso a paso las encontramos en el archivo **password-validate.helper.ts**. Para crear estas funciones de forma consistente y comprobando que funcionan correctamente, hacemos pruebas unitarias en **password-validate.helper.spec.ts**
+
+En primer lugar creamos la función que permite identificar si la clave contiene mayúsculas y minúsculas.
+
+En el archivo de **constants.ts** añadimos un array de _MAYUSCULAS_ y otro de _MINUSCULAS_, para asi poder pasar todas las mayusculas y minúsculas a la hora de hacer las comprobaciones. Si no deberíamos usar .upperCase y .lowerCase.
+
+De esta manera unificamos todas las comprobaciones y si en un momento dado queremos incluir un simbolo o letra podemos hacerlo desde estos arrays que crearemos en este archivo de constantes.
+
+Si la clave tiene mayúsculas y minúsculas nos devuelve un `esValida: true`, sino un `esValida: false` + `error: "La clave debe de tener mayúsculas y minúsculas"`
