@@ -1,5 +1,8 @@
 import { ValidacionClave } from "./model";
-import { tieneMayusculasYMinusculas } from "./password-validate.helper";
+import {
+  tieneMayusculasYMinusculas,
+  tieneNumeros,
+} from "./password-validate.helper";
 
 // Si la clave no tiene mayúsculas y minúsculas, el error será: "La clave debe de tener mayúsculas y minúsculas".
 
@@ -35,7 +38,21 @@ describe("tieneMayusculasYMinusculas", () => {
   });
 });
 
-// export interface ValidacionClave {
-//   esValida: boolean;
-//   error?: string;
-// }
+describe("tieneNumeros", () => {
+  it("debería retornar esValida: true si la clave tiene números", () => {
+    const validacion: ValidacionClave = tieneNumeros("ClaveSegura123");
+    const expected: ValidacionClave = { esValida: true };
+
+    expect(validacion).toEqual(expected);
+  });
+
+  it("debería retornar esValida: false si la clave tiene números", () => {
+    const validacion: ValidacionClave = tieneNumeros("ClaveSeguraABC");
+    const expected: ValidacionClave = {
+      esValida: false,
+      error: "La clave debe de tener números",
+    };
+
+    expect(validacion).toEqual(expected);
+  });
+});

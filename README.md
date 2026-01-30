@@ -31,3 +31,9 @@ En el archivo de **constants.ts** añadimos un array de _MAYUSCULAS_ y otro de _
 De esta manera unificamos todas las comprobaciones y si en un momento dado queremos incluir un simbolo o letra podemos hacerlo desde estos arrays que crearemos en este archivo de constantes.
 
 Si la clave tiene mayúsculas y minúsculas nos devuelve un `esValida: true`, sino un `esValida: false` + `error: "La clave debe de tener mayúsculas y minúsculas"`
+
+## 02. La clave debe tener números
+
+Igual que hemos hecho antes, pero ests vez comprobamos que se están introduciendo números del 0 al 9. En el archivo de **constants.ts** añadimos un array de _NUMEROS_.
+
+Si la clave tiene números nos devuelve un `esValida: true`, sino un `esValida: false` + `error: "La clave debe tener números"`
