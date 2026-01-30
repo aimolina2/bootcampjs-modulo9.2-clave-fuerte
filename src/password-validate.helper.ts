@@ -3,7 +3,6 @@ import {
   MINUSCULAS,
   NUMEROS,
   CARACTERES_ESPECIALES,
-  commonPasswords,
 } from "./constants";
 import { ValidacionClave } from "./model";
 
@@ -18,11 +17,8 @@ export const tieneMayusculasYMinusculas = (clave: string): ValidacionClave => {
   );
 
   return tieneMayusculas && tieneMinusculas
-    ? { esValida: true }
-    : {
-        esValida: false,
-        error: "La clave debe de tener mayúsculas y minúsculas",
-      };
+    ? passwordValida()
+    : passwordNoValida("La clave debe de tener mayúsculas y minúsculas");
 };
 
 // NÚMEROS
@@ -33,8 +29,8 @@ export const tieneNumeros = (clave: string): ValidacionClave => {
   );
 
   return tieneNumero
-    ? { esValida: true }
-    : { esValida: false, error: "La clave debe de tener números" };
+    ? passwordValida()
+    : passwordNoValida("La clave debe de tener números");
 };
 
 // CARACTERES ESPECIALES
@@ -45,21 +41,17 @@ export const tieneCaracteresEspeciales = (clave: string): ValidacionClave => {
   );
 
   return tieneCaracterEspecial
-    ? { esValida: true }
-    : {
-        esValida: false,
-        error: "La clave debe de tener caracteres especiales",
-      };
+    ? passwordValida()
+    : passwordNoValida("La clave debe de tener caracteres especiales");
 };
 
 // LONGITUD MINIMA (>=8)
 export const tieneLongitudMinima = (clave: string): ValidacionClave => {
   return clave.length >= 8
-    ? { esValida: true }
-    : {
-        esValida: false,
-        error: "La clave debe de tener una longitud mínima de 8 caracteres",
-      };
+    ? passwordValida()
+    : passwordNoValida(
+        "La clave debe de tener una longitud mínima de 8 caracteres",
+      );
 };
 
 // NOMBRE DE USUARIO DIFERENTE A LA CONTRASEÑA
@@ -72,11 +64,8 @@ export const tieneNombreUsuario = (
   const usernameLowerCase = nombreUsuario.toLowerCase();
 
   return !passwordLowerCase.includes(usernameLowerCase)
-    ? { esValida: true }
-    : {
-        esValida: false,
-        error: "La clave no debe tener el nombre del usuario",
-      };
+    ? passwordValida()
+    : passwordNoValida("La clave no debe tener el nombre del usuario");
 };
 
 // PALABRAS COMUNES
@@ -91,9 +80,16 @@ export const tienePalabrasComunes = (
   );
 
   return !contienePalabraComun
-    ? { esValida: true }
-    : {
-        esValida: false,
-        error: "La clave no debe de contener palabras comunes",
-      };
+    ? passwordValida()
+    : passwordNoValida("La clave no debe de contener palabras comunes");
+};
+
+// Válido y no válido helpers
+
+const passwordValida = () => {
+  return { esValida: true };
+};
+
+const passwordNoValida = (notificacion: string) => {
+  return { esValida: false, error: notificacion };
 };
