@@ -1,4 +1,9 @@
-import { MAYUSCULAS, MINUSCULAS, NUMEROS } from "./constants";
+import {
+  MAYUSCULAS,
+  MINUSCULAS,
+  NUMEROS,
+  CARACTERES_ESPECIALES,
+} from "./constants";
 import { ValidacionClave } from "./model";
 
 // MAYUSCULAS y MINUSCULAS
@@ -29,4 +34,19 @@ export const tieneNumeros = (clave: string): ValidacionClave => {
   return tieneNumero
     ? { esValida: true }
     : { esValida: false, error: "La clave debe de tener números" };
+};
+
+// CARACTERES ESPECIALES
+export const tieneCaracteresEspeciales = (clave: string): ValidacionClave => {
+  const passwordArray = clave.split("");
+  const tieneCaracterEspecial = passwordArray.some((caracter) =>
+    CARACTERES_ESPECIALES.includes(caracter),
+  );
+
+  return tieneCaracterEspecial
+    ? { esValida: true }
+    : {
+        esValida: false,
+        error: "La clave debe de tener caracteres especiales",
+      };
 };

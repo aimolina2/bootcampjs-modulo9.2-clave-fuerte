@@ -34,6 +34,12 @@ Si la clave tiene mayúsculas y minúsculas nos devuelve un `esValida: true`, si
 
 ## 02. La clave debe tener números
 
-Igual que hemos hecho antes, pero ests vez comprobamos que se están introduciendo números del 0 al 9. En el archivo de **constants.ts** añadimos un array de _NUMEROS_.
+Igual que hemos hecho antes, pero esta vez comprobamos que se están introduciendo números del 0 al 9. En el archivo de **constants.ts** añadimos un array de _NUMEROS_.
 
 Si la clave tiene números nos devuelve un `esValida: true`, sino un `esValida: false` + `error: "La clave debe tener números"`
+
+## 03. La clave debe tener caracteres especiales
+
+En el archivo de **constants.ts** añadimos un array de _CARACTERES_ESPECIALES_.
+
+Si la clave tiene estos caracteres especiales nos devuelve un `esValida: true`, sino un `esValida: false` + `error: "La clave debe de tener caracteres especiales"`
