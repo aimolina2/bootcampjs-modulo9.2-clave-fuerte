@@ -60,3 +60,20 @@ export const tieneLongitudMinima = (clave: string): ValidacionClave => {
         error: "La clave debe de tener una longitud mínima de 8 caracteres",
       };
 };
+
+// NOMBRE DE USUARIO DIFERENTE A LA CONTRASEÑA
+
+export const tieneNombreUsuario = (
+  nombreUsuario: string,
+  clave: string,
+): ValidacionClave => {
+  const passwordLowerCase = clave.toLowerCase();
+  const usernameLowerCase = nombreUsuario.toLowerCase();
+
+  return !passwordLowerCase.includes(usernameLowerCase)
+    ? { esValida: true }
+    : {
+        esValida: false,
+        error: "La clave no debe tener el nombre del usuario",
+      };
+};

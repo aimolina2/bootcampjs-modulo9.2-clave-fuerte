@@ -49,3 +49,9 @@ Si la clave tiene estos caracteres especiales nos devuelve un `esValida: true`, 
 En este caso lo que debemos hacer es usar el _.lenght_ para comprobar el número de caracteres.
 
 Si la clave tiene 8 o más caracteres nos devuelve un `esValida: true`, sino un `esValida: false` + `error: "La clave debe de tener una longitud mínima de 8 caracteres"`
+
+## 05. La clave no puede contener el nombre del usuario
+
+Aqui pasaremos todos los caracteres a minúscula para comprobar que no coincide en ningun momento el nombre de usuario con la clave. Después con un _.include_ verificamos que no esté incluido en la contraseña-
+
+Así, si la clave no contiene el nombre de usuari nos devuelve un `esValida: true`, sino un `esValida: false` + `error: "La clave no debe tener el nombre del usuario"`

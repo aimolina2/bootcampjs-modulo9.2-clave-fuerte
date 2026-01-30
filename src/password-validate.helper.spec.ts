@@ -4,6 +4,7 @@ import {
   tieneNumeros,
   tieneCaracteresEspeciales,
   tieneLongitudMinima,
+  tieneNombreUsuario,
 } from "./password-validate.helper";
 
 // MAYÚSCULAS Y MINÚSCULAS
@@ -99,6 +100,33 @@ describe("tieneLongitudMinima", () => {
     const expected: ValidacionClave = {
       esValida: false,
       error: "La clave debe de tener una longitud mínima de 8 caracteres",
+    };
+
+    expect(validacion).toEqual(expected);
+  });
+});
+
+// NOMBRE DE URUARIO DIFERENTE A LA CONTRASEÑA
+
+describe("tieneNombreUsuario", () => {
+  it("debería retornar esValida: true si la clave no contiene el nombre de usuario", () => {
+    const validacion: ValidacionClave = tieneNombreUsuario(
+      "usuario",
+      "ClaveSegura123",
+    );
+    const expected: ValidacionClave = { esValida: true };
+
+    expect(validacion).toEqual(expected);
+  });
+
+  it("debería retornar esValida: false si la clave contiene el nombre de usuario", () => {
+    const validacion: ValidacionClave = tieneNombreUsuario(
+      "usuario",
+      "ClaveUsuario123",
+    );
+    const expected: ValidacionClave = {
+      esValida: false,
+      error: "La clave no debe tener el nombre del usuario",
     };
 
     expect(validacion).toEqual(expected);
