@@ -17,6 +17,7 @@ Para realizar este proyecto se han creado varios archivos con el fin de tener el
 - **constants.ts** con las contraseñas y otros parámetros que vamos a pasar a nuestro modelo para verificar las contraseñas.
 - **main.ts** donde indicamos que debemos mostrar por `consola` el resultado.
 - **password-validate.ts** con la _función principal_ que nos indica cómo validar la contraseña. Es a la que llamamos en el main.ts.
+- **password-validate.spec.ts** para realizar las pruebas unitarias de la función principal.
 - **password-validate.helper.ts** _desglosamos las funciones_ a las que llamamos desde _password-validate.ts_. Paso a paso que nos ayuda a crear una función mayor.
 - **password-validate.helper.spec.ts** donde realizamos _pruebas_ unitarias para asegurarnos de que las funciones se ejecutan sin errores.
 
@@ -63,3 +64,17 @@ Pasaremos el array _commonPasswords_ del archivo **constants.ts** que contiene l
 Igual que antes, comprobaremos que no se usan en mayúscula ni minúscula.
 
 Si la clave no contiene ninguna de estas "palabras" comunes nos devuelve un `esValida: true`, sino un `esValida: false` + `error: "La clave no debe de contener palabras comunes"`
+
+## 07. FINAL: Validar clave
+
+En el archivo **password-validate.ts** tenemos la funcion que llama a las funciones que hemos creado en el "archivo auxiliar". Las recorremos paso a paso, para que si la primera condición es válida pase a la siguiente y así nos pueda dar el resultado final de si la constraseña introducida es válida o no según las condiciones (las validamos teniendo también en cuenta el nombre de usuario y las palabras comunes).
+
+en **main.ts** importamos esta funcion de _validarClave_ e introducimos manualmente un nombre de usuario y una clave. Por consola se muestra el resultado de la comprobación
+
+<img src= "./images/img_clave.png" alt= "resultado clave" title= "resultado clave" />
+
+## 08. Comprobación resultado
+
+Y aunque para esta función podemos hacer pruebas cambiando directamente el nombre de usuario y la clave, podemos crear un archivo de pruebas unitarias para asegurarnos de que esta última función se ejecuta correctamente y sin errores.
+
+En este archivo de pruebas **password-validate.spec.ts** podemos reproducir varias casuísticas: con o sin mayúsculas, con menos de 8 caracteres, con más, incluyendo palabras comunes, etc.
